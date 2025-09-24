@@ -1,0 +1,61 @@
+*{
+    margin:0;
+    padding:0;
+}
+.main-body{
+    display:flex;
+}
+.main-title{
+    background-color:#3470e9;
+    height:60px;
+    padding:10px;
+    align-content: center;
+}
+.main-title-content{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+    font-size: 32px;
+}
+.main-menu-wrap{
+    width:15%;
+    background-color:#3470e9;
+}
+.main-menu-top{
+    font-weight:bold;
+    font-size: 16px;
+    color:white;
+    border-bottom:1px solid white;
+}
+.menu-list{
+    font-size: 12px;
+    color: white;
+    text-decoration:none;
+}
+.main-content{
+    padding:10px;
+    width:100%;
+    flex:1;
+    min-width: 0;      /* 콘텐츠가 flex item 폭을 밀어내지 못하게 */
+    overflow-x: auto;  /* 내용이 넘치면 스크롤 */
+}
+ul{
+    padding:10px;
+}
+li{
+    padding-left:10px;
+}
+.company-list {
+    width: 60%;
+    height: 600px;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.company-table {
+    width: 100%;
+    font-size:12px;
+}
+
+td{
+    white-space:nowrap;
+}
