@@ -59,3 +59,13 @@ li{
 td{
     white-space:nowrap;
 }
+th{
+    white-space:nowrap;
+}
+.sub-title-wrap span{
+    font-weight:bold;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
