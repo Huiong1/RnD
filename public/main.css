@@ -18,9 +18,14 @@
     font-size: 32px;
 }
 .main-menu-wrap{
+    height:100vh;
+    overflow-y:auto;
     width:15%;
     background-color:#3470e9;
 }
+.main-menu-wrap::-webkit-scrollbar {
+  display: none;  
+}   
 .main-menu-top{
     font-weight:bold;
     font-size: 16px;

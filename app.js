@@ -2,6 +2,7 @@ const express = require('express');
 const path = require("path");
 const mysql = require('mysql2');
 const disclosure = require("./routes/disclosure");
+const registration = require("./routes/registration");
 const connection = require("./db/db_connect");
 
 const app = express();
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/disclosure", disclosure);
+app.use("/registration", registration);
 app.get('/', (req, res) => {
     const query = "SELECT * FROM company_info";
     connection.query(query, (err, results) => {
