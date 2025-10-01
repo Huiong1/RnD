@@ -15,7 +15,56 @@
                     <span class="sub-title">공시검색</span>
                 </div>
                 <div class="main-tables-wrap">
-                    <%- include('../common_html/company_table') %>
+                    <div class="company-list">
+                    <input type="text" id="searchInput" placeholder="회사명 검색">
+                        <table id="companyTable" class="company-table" border='1'>
+                            <thead >
+                                <tr>
+                                    <th>종목코드</th>
+                                    <th>고유코드</th>
+                                    <th>회사명</th>
+                                    <th>사업보고서 바로가기</th>
+                                    <th>경실련 업종</th>
+                                    <th>업종</th>
+                                    <th>주요제품</th>
+                                    <th>대표자명</th>
+                                    <th>홈페이지</th>
+                                    <th>지역</th>
+                                </tr>
+                            </thead>
+                            <% companies.forEach(function(company) { %>
+                            <tbody>
+                                <tr>
+                                    <td><%= company.company_code %></td>
+                                    <td><%= company.primary_code %></td>
+                                    <td><a href="/disclosure/search-disclosure/<%= company.primary_code %>"> <%= company.company_name %> </a></td>
+                                    <td><a href="<%= company.company_report_url %>"><%= company.company_report_url %></a></td>
+                                    <td><%= company.category %></td>
+                                    <td><%= company.sector %></td>
+                                    <td><%= company.main_product %></td>
+                                    <td><%= company.ceo_name %></td>    
+                                    <td><a href="<%= company.company_url %>"><%= company.company_url %></a></td>
+                                    <td><%= company.location %></td>
+                                </tr>                       
+                            </tbody>
+                            <% }) %>
+                        </table>
+                    </div>
+                    <script>
+                        document.getElementById("searchInput").addEventListener("keyup", function() {
+                        let filter = this.value.toLowerCase();
+                        let rows = document.querySelectorAll("#companyTable tbody tr");
+
+                        rows.forEach(function(row) {
+                            let companyName = row.cells[2].innerText.toLowerCase(); // 3번째 열: 회사명
+                            if (companyName.indexOf(filter) > -1) {
+                            row.style.display = "";
+                            } else {
+                            row.style.display = "none";
+                            }
+                        });
+                        });
+                    </script>
                     <div class="disclosure-detail">
                         <% if (disclosureData && disclosureData.status === "000") { %>
                             <h3>공시 목록</h3>

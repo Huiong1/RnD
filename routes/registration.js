@@ -14,9 +14,39 @@ router.get('/debt-security', (req,res) => {
         }
         res.render('./registration/debt_security', { 
             companies: results,
-            companyProfileData: null
+            companyDebtData: null
         });
     });
-})
+});
+router.get('/debt-security/:primary_code', async (req,res) => {
+  const corpCode = req.params.primary_code;
+  const url = "	https://opendart.fss.or.kr/api/estkRs.json";
+
+  try {
+    // DB 조회 (왼쪽 회사목록 유지)
+    const query = "SELECT * FROM company_info";
+    req.db.query(query, async (err, results) => {
+      if (err) return res.status(500).send("DB Error");
+
+      // OpenDART API 호출
+      const response = await axios.get(url, {
+              params: {
+                crtfc_key: OPEN_DART_KEY,
+                corp_code: corpCode,
+                bgn_de: "20230101",
+                end_de: "20231231",
+              }
+            });
+      // DB 목록 + API 데이터 동시에 EJS로 전달
+      res.render('./registration/debt_security', { 
+        companies: results,
+        companyDebtData: response.data
+      });
+    });
+  } catch (err) {
+    console.error("OpenDART API 호출 오류:", err.message);
+    res.status(500).json({ error: "OpenDART API 호출 실패" });
+  }
+});
 
 module.exports = router;
