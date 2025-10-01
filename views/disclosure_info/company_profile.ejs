@@ -123,6 +123,7 @@
                             <thead >
                                 <tr>
                                     <th>종목코드</th>
+                                    <th>고유코드</th>
                                     <th>회사명</th>
                                     <th>사업보고서 바로가기</th>
                                     <th>경실련 업종</th>
@@ -137,7 +138,8 @@
                             <tbody>
                                 <tr>
                                     <td><%= company.company_code %></td>
-                                    <td><a href="/disclosure/company-profile/<%= company.company_code %>"> <%= company.company_name %> </a></td>
+                                    <td><%= company.primary_code %></td>
+                                    <td><a href="/disclosure/company-profile/<%= company.primary_code %>"> <%= company.company_name %> </a></td>
                                     <td><a href="<%= company.company_report_url %>"><%= company.company_report_url %></a></td>
                                     <td><%= company.category %></td>
                                     <td><%= company.sector %></td>
@@ -154,32 +156,70 @@
                         <% if (companyProfileData && companyProfileData.status === "000") { %>
                             <h3>공시 목록</h3>
                             <table border="1">
-                            <tr>
-                                <th>정식명칭</th><th>영문명칭</th><th>종목명</th><th>종목코드</th><th>대표자명</th>
-                                <th>법인구분</th><th>법인등록번호</th><th>사업자등록번호</th><th>주소</th><th>홈페이지</th>
-                                <th>IR홈페이지</th><th>전화번호</th><th>팩스번호</th><th>업종코드</th>
-                                <th>설립일</th><th>결산월</th>
-                            </tr>
-                            <% companyProfileData.list.forEach(function(item) { %>
                                 <tr>
-                                <td><%= item.corp_name %></td>
-                                <td><%= item.corp_name_eng %></td>
-                                <td><%= item.stock_name %></td>
-                                <td><%= item.stock_code %></td>
-                                <td><%= item.ceo_nm %></td>
-                                <td><%= item.corp_cls %></td>
-                                <td><%= item.jurir_no %></td>
-                                <td><%= item.bizr_no %></td>
-                                <td><%= item.adres %></td>
-                                <td><%= item.hm_url %></td>
-                                <td><%= item.ir_url %></td>
-                                <td><%= item.phn_no %></td>
-                                <td><%= item.fax_no %></td>
-                                <td><%= item.induty_code %></td>
-                                <td><%= item.est_dt %></td>
-                                <td><%= item.acc_mt %></td>
+                                    <th>정식명칭</th>
+                                    <td><%= companyProfileData.corp_name %></td>
                                 </tr>
-                            <% }) %>
+                                <tr>
+                                    <th>영문명칭</th>
+                                    <td><%= companyProfileData.corp_name_eng %></td>
+                                </tr>
+                                <tr>
+                                    <th>종목명</th>
+                                    <td><%= companyProfileData.stock_name %></td>
+                                </tr>
+                                <tr>
+                                    <th>종목코드</th>
+                                    <td><%= companyProfileData.stock_code %></td>
+                                </tr>
+                                <tr>
+                                    <th>대표자명</th>
+                                    <td><%= companyProfileData.ceo_nm %></td>
+                                </tr>
+                                <tr>
+                                    <th>법인구분</th>
+                                    <td><%= companyProfileData.corp_cls %></td>
+                                </tr>
+                                <tr>
+                                    <th>법인등록번호</th>
+                                    <td><%= companyProfileData.jurir_no %></td>
+                                </tr>
+                                <tr>
+                                    <th>사업자등록번호</th>
+                                    <td><%= companyProfileData.bizr_no %></td>
+                                </tr>
+                                <tr>
+                                    <th>주소</th>
+                                    <td><%= companyProfileData.adres %></td>
+                                </tr>
+                                <tr>
+                                    <th>홈페이지</th>
+                                    <td><a href="<%= companyProfileData.hm_url %>"><%= companyProfileData.hm_url %></a></td>
+                                </tr>
+                                <tr>
+                                    <th>IR홈페이지</th>
+                                    <td><a href="<%= companyProfileData.ir_url %>"><%= companyProfileData.ir_url %></a></td>
+                                </tr>
+                                <tr>
+                                    <th>전화번호</th>
+                                    <td><%= companyProfileData.phn_no %></td>
+                                </tr>
+                                <tr>
+                                    <th>팩스번호</th>
+                                    <td><%= companyProfileData.fax_no %></td>
+                                </tr>
+                                <tr>
+                                    <th>업종코드</th>
+                                    <td><%= companyProfileData.induty_code %></td>
+                                </tr>
+                                <tr>
+                                    <th>설립일</th>
+                                    <td><%= companyProfileData.est_dt %></td>
+                                </tr>
+                                <tr>
+                                    <th>결산월</th>
+                                    <td><%= companyProfileData.acc_mt %></td>
+                                </tr>
                             </table>
                         <% } else if (companyProfileData) { %>
                             <p>데이터 없음: <%= companyProfileData.message %></p>

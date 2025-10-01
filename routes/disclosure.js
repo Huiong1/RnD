@@ -22,8 +22,8 @@ router.get('/search-disclosure', (req, res) => {
 });
 
 
-router.get('/search-disclosure/:company_code', async (req,res) => {
-  const corpCode = req.params.company_code;
+router.get('/search-disclosure/:primary_code', async (req,res) => {
+  const corpCode = req.params.primary_code;
   const url = "https://opendart.fss.or.kr/api/list.json";
 
   try {
@@ -66,8 +66,9 @@ router.get('/company-profile', (req,res) => {
         });
     });
 })
-router.get('/company-profile/:company_code', async (req,res) => {
-  const corpCode = req.params.company_code;
+router.get('/company-profile/:primary_code', async (req,res) => {
+  const corpCode = req.params.primary_code;
+  console.log("고유번호",corpCode);
   const url = "https://opendart.fss.or.kr/api/company.json";
 
   try {
@@ -83,7 +84,7 @@ router.get('/company-profile/:company_code', async (req,res) => {
           corp_code: corpCode,
         }
       });
-
+      console.log(response.data);
       // DB 목록 + API 데이터 동시에 EJS로 전달
       res.render('./disclosure_info/company_profile', { 
         companies: results,

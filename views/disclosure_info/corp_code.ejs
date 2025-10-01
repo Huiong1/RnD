@@ -123,6 +123,7 @@
                             <thead >
                                 <tr>
                                     <th>종목코드</th>
+                                    <th>고유코드</th>
                                     <th>회사명</th>
                                     <th>사업보고서 바로가기</th>
                                     <th>경실련 업종</th>
@@ -137,7 +138,8 @@
                             <tbody>
                                 <tr>
                                     <td><%= company.company_code %></td>
-                                    <td><a href="/disclosure/company-profile/<%= company.company_code %>"> <%= company.company_name %> </a></td>
+                                    <td><%= company.primary_code %></td>
+                                    <td><a href="/disclosure/company-profile/<%= company.primary_code %>"> <%= company.company_name %> </a></td>
                                     <td><a href="<%= company.company_report_url %>"><%= company.company_report_url %></a></td>
                                     <td><%= company.category %></td>
                                     <td><%= company.sector %></td>
